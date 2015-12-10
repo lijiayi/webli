@@ -48,6 +48,12 @@
          <type>ejb</type>
          <scope>provided</scope>
       </dependency>
+      
+      <dependency>
+         <groupId>com.mvn.project</groupId>
+         <artifactId>webli-jar</artifactId>
+         <scope>provided</scope>
+      </dependency>
 
       <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss WildFly -->
       <dependency>
@@ -60,13 +66,6 @@
       <dependency>
          <groupId>javax.enterprise</groupId>
          <artifactId>cdi-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
-      
-      <!-- Import the JSF API, we use provided scope as the API is included in JBoss WildFly -->
-      <dependency>
-         <groupId>org.jboss.spec.javax.faces</groupId>
-         <artifactId>jboss-jsf-api_2.2_spec</artifactId>
          <scope>provided</scope>
       </dependency>
 
@@ -103,6 +102,7 @@
             <configuration>
                <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
                <failOnMissingWebXml>false</failOnMissingWebXml>
+               <warName>rest-helloworld</warName>
             </configuration>
          </plugin>
       </plugins>

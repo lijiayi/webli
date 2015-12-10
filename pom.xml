@@ -36,6 +36,7 @@
         <module>webli-ejb</module>
         <module>webli-web</module>
         <module>webli-ear</module>
+        <module>webli-jar</module>
     </modules>
 
     <properties>
@@ -76,6 +77,13 @@
                 <artifactId>webli-ejb</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.mvn.project</groupId>
+                <artifactId>webli-jar</artifactId>
+                <version>${project.version}</version>
+                <type>jar</type>
             </dependency>
             
             <!-- Define the version of the WAR so that we don't need to repeat 

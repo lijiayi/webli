@@ -40,6 +40,12 @@
     </licenses>
 
     <dependencies>
+    
+    	<dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>webli-jar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- Declare the APIs we depend on and need for compilation. All of 
             them are provided by JBoss WildFly -->
