@@ -11,7 +11,10 @@
  *----------------------------------------------------------------------------*/
 package com.wulin.ejb;
 
+import javax.annotation.Resource;
+import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
+import javax.persistence.RollbackException;
 
 import com.webli.api.HelloLocal;
 import com.wulin.interceptor.annotation.HelloInterceptorBinding;
@@ -19,10 +22,16 @@ import com.wulin.interceptor.annotation.HelloInterceptorBinding;
 @Stateless
 public class HelloImpl implements HelloLocal{
 
+	@Resource
+    private EJBContext context;
+
 	@Override
 	@HelloInterceptorBinding
-	public String helloWorld(String input) {
-		return "Hello world" + input;
+	public String helloWorld(String input) throws RollbackException {
+		context.setRollbackOnly();
+		//throw new RollbackException("Excaption amessage");
+		return "hi";
+		//return "Hello world" + input;
 	}
 
 }

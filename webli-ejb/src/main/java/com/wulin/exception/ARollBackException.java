@@ -9,18 +9,23 @@
  * program(s) have been supplied.
  *******************************************************************************
  *----------------------------------------------------------------------------*/
-package com.wulin.ejb;
+package com.wulin.exception;
 
-import java.util.concurrent.Callable;
+import javax.ejb.ApplicationException;
 
-import javax.ejb.Stateless;
+@ApplicationException(rollback=true)
+public class ARollBackException extends RuntimeException {
 
-@Stateless
-//@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class NewTransactionService {
-
-	public Object createNewTransaction(final Callable<Object> task) throws Exception{
-		System.out.println("New service being called");
-		return task.call();
+	/**
+	 * @param string
+	 */
+	public ARollBackException(String string) {
+		super(string);
 	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -48527461937639892L;
+
 }

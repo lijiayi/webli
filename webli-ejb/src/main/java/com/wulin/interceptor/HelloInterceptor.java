@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.interceptor.*;
 
 import com.wulin.ejb.NewTransactionService;
+import com.wulin.exception.ARollBackException;
 import com.wulin.interceptor.annotation.HelloInterceptorBinding;
 
 @HelloInterceptorBinding
@@ -26,23 +27,27 @@ public class HelloInterceptor {
 	NewTransactionService newService;
 
 	@AroundInvoke
-	public Object modifyBehaviour(final InvocationContext ctx) throws Exception{
-			Object result = null;
-			try {
-				Object[] parameters = ctx.getParameters();
-			    String param = (String) parameters[0];
-			    param = "[Hello Interceptor]" + param;
-			    parameters[0] = param;
-			    ctx.setParameters(parameters);
-			    result = newService.createNewTransaction(new Callable<Object>(){
-            		public Object call() throws Exception{
-            			return ctx.proceed();
-            		}
-            	});
-			} catch (Exception e) {
-				throw e;
-			} 
-			
-			return result;
+	public Object modifyBehaviour(final InvocationContext ctx) throws Exception {
+		Object result = null;
+		try {
+			Object[] parameters = ctx.getParameters();
+			String param = (String) parameters[0];
+			param = "[Hello Interceptor]" + param;
+			parameters[0] = param;
+			ctx.setParameters(parameters);
+			result = newService.createNewTransaction(new Callable<Object>() {
+				public Object call() throws Exception {
+					return ctx.proceed();
+				}
+			});
+		} catch (ARollBackException ex) {
+			System.out.println(ex.getMessage() + "Exception is thrown");
+			return "hahahah";
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "rollback exception is catched");
+			return "rollback exception is catched";
+		}
+
+		return result;
 	}
 }

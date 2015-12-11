@@ -28,6 +28,11 @@ public class WulinRestService {
 	@Produces("application/json;charset=utf-8")
 	public Response printMessage(@PathParam("param") String msg) {
 
-		return Response.status(200).entity(hello.helloWorld(msg)).build();
+		try {
+			return Response.status(200).entity(hello.helloWorld(msg)).build();
+		} catch (Exception e) {
+			System.out.println("Rest resource catched yoru exception");
+			return Response.status(500).entity(e.getMessage()).build();
+		}
 	}
 }
